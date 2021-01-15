@@ -10,7 +10,7 @@ client.on('ready', () => {
   client.user.setActivity("you invite members and tracking them!", {
     type: "WATCHING",
    });
-   client.channels.cache.find(channel => channel.name === '💬・the-bar').send("Hello i am online :checkmark:"); // for discord v12
+   client.channels.cache.find(channel => channel.name === 'invites-logs').send("yo dawg my is status: ``online`` "); // for discord v12
     console.log(`${client.user.tag} has logged in.`);
     client.guilds.cache.forEach(guild => {
         guild.fetchInvites()
@@ -39,7 +39,7 @@ client.on('guildMemberAdd', async member => {
          
             .setTimestamp()
             .setTitle(`Member just Joined `);
-        const welcomeChannel = member.guild.channels.cache.find(channel => channel.id === '766305946673610773');
+        const welcomeChannel = member.guild.channels.cache.find(channel => channel.name === 'invites-logs');
         if(welcomeChannel) {
             welcomeChannel.send(embed).catch(err => console.log(err));
         }
@@ -47,5 +47,14 @@ client.on('guildMemberAdd', async member => {
     catch(err) {
         console.log(err);
     }
- });
+    if (message.content === "oii") {
+        message.channel.send(`I am Active in ${client.guilds.cache.size} Servers`);
+    }
+    if (message.content === "yo") {
+        message.channel.send(`I am Active in ${client.guilds.cache.size} Servers`);
+    }
+    if (message.content === "ola") {
+        message.channel.send(`I am Active in ${client.guilds.cache.size} Servers`);
+    }
+});
 client.login(config.token);
