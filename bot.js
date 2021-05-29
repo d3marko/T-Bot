@@ -10,7 +10,7 @@ client.on('ready', () => {
   client.user.setActivity("you invite members and tracking them!", {
     type: "WATCHING",
    });
-   client.channels.cache.find(channel => channel.name === 'invites-logs').send("yo dawg my is status: ``online`` "); // for discord v12
+   client.channels.cache.find(channel => channel.name === 'invites-logs').send("Bot Status: ``online`` "); 
     console.log(`${client.user.tag} has logged in.`);
     client.guilds.cache.forEach(guild => {
         guild.fetchInvites()
