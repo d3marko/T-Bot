@@ -1,60 +1,25 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const Discord = require("discord.js");
+const client = new Discord.Client({disableEveryone: true});
 const config = require("./config.json");
-const {MessageEmbed} = require('discord.js');
-const guildInvites = new Map();
 
 
-client.on('inviteCreate', async invite => guildInvites.set(invite.guild.id, await invite.guild.fetchInvites()));
-client.on('ready', () => {
-  client.user.setActivity("you invite members and tracking them!", {
-    type: "WATCHING",
-   });
-   client.channels.cache.find(channel => channel.name === 'invites-logs').send("Bot Status: ``online`` "); 
-    console.log(`${client.user.tag} has logged in.`);
-    client.guilds.cache.forEach(guild => {
-        guild.fetchInvites()
-            .then(invites => guildInvites.set(guild.id, invites))
-            .catch(err => console.log(err));
-    });
+
+client.on("ready", () => {
+  console.log(`Bot state: started\n 
+	| STATS:\n| LOG: bot started with: ${client.users.cache.size} users.\n| LOG: bot started in: ${client.channels.cache.size} channels.\n| LOG: bot started on: ${client.guilds.cache.size} guilds.`);
+
+client.user.setPresence({ activity: { name: 'beta' }, status: 'online' })
 });
 
-client.on('guildMemberAdd', async member => {
-    const cachedInvites = guildInvites.get(member.guild.id);
-    const newInvites = await member.guild.fetchInvites();
-    guildInvites.set(member.guild.id, newInvites);
-    try {
-        const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
-        const embed = new MessageEmbed()
-        .setColor('#802d16')
-        .addFields(
-            { name: 'Username:', value: `${member.user.tag}`, inline: true },
-            { name: 'Invited by:', value: `${usedInvite.inviter.tag}`, inline: true },
-            { name: 'Invitation Link:', value: `${usedInvite.url}`, inline: true },
-            { name: 'Join Count:', value: `${member.guild.memberCount}`, inline: true },
-            { name: 'User ID:', value: `${member.user.id}`, inline: true },
-            { name: 'Created At:', value: `${member.user.createdAt}`, inline: true },
+client.on("message", async message => {
+ 
+  if(!message.content.startsWith(config.prefix)) return;
 
-                          )
-         
-            .setTimestamp()
-            .setTitle(`Member just Joined `);
-        const welcomeChannel = member.guild.channels.cache.find(channel => channel.name === 'invites-logs');
-        if(welcomeChannel) {
-            welcomeChannel.send(embed).catch(err => console.log(err));
-        }
-    }
-    catch(err) {
-        console.log(err);
-    }
-    if (message.content === "oii") {
-        message.channel.send(`I am Active in ${client.guilds.cache.size} Servers`);
-    }
-    if (message.content === "yo") {
-        message.channel.send(`I am Active in ${client.guilds.cache.size} Servers`);
-    }
-    if (message.content === "ola") {
-        message.channel.send(`I am Active in ${client.guilds.cache.size} Servers`);
-    }
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+
 });
+
+
 client.login(config.token);
