@@ -1,25 +1,6 @@
 {
-  "name": "5",
-  "version": "1.0.0",
-  "description": "![Banner](https://mayodev.live/upload/banner.png)",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/d3marko/DiscordLogger.git"
-  },
-  "author": "Mayo",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/d3marko/DiscordLogger/issues"
-  },
-  "homepage": "https://github.com/d3marko/DiscordLogger#readme",
+  "main": "index.js",
   "dependencies": {
-    "discord.js": "^12.5.3"
-  },
-  "devDependencies": {
-    "eslint": "^7.27.0"
+    "discord.js": "12.0.1"
   }
 }
