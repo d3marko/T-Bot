@@ -18,19 +18,19 @@ client.user.setPresence({ activity: { name: `${client.users.cache.size} users` }
 
 
   if(command === "c") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("**you are not authorized to use this command.**");
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("**you are not authorized to use this command :no_entry:**");
 
     const deleteCount = parseInt(args[0], 10);
     
     if(!deleteCount || deleteCount < 1 || deleteCount > 100)
-      return message.reply("provide a number between 1 and 100 for the number of messages to delete");
+      return message.channel.send("Dude, provide me a fucking number between 1 and 100 for the number of messages to delete smh");
       
     message.channel.bulkDelete(deleteCount)
       .catch(error => message.reply("${error} "));
   
     }
     else if (command === "flipcoin" ) {
-      var facts = ["Heads", "Tails", "lol", "Your coin fell in the ground, pick it up and try again."];
+      var facts = ["Heads", "Tails", ":no_entry:", "Your coin fell in the ground, pick it up and try again."];
       var fact = Math.floor(Math.random() * facts.length);
       message.channel.send(facts[fact]);
   }
